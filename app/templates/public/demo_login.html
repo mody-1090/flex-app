@@ -2,7 +2,30 @@
 {% block title %}تجربة نظام إدارة المخزون{% endblock %}
 
 {% block content %}
-<div class="container text-center py-5">
+<style>
+  @media (max-width: 767px) {
+    #mobile-warning {
+      display: block;
+    }
+    #main-content {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #mobile-warning {
+      display: none;
+    }
+  }
+</style>
+
+<!-- تحذير عند فتح الصفحة من الجوال -->
+<div id="mobile-warning" class="alert alert-danger text-center my-5 mx-3">
+  هذا النظام لا يعمل على الجوال، يُرجى استخدام جهاز لوحي أو كمبيوتر لتجربة النظام بشكل صحيح.
+</div>
+
+<!-- محتوى الصفحة الأساسي -->
+<div id="main-content" class="container text-center py-5">
   <h2 class="mb-4">جرّب نظام إدارة المخزون الآن مجانًا!</h2>
   <p class="mb-4">استكشف المميزات المتقدمة التي يقدّمها نظامنا الذكي لإدارة المخزون بنفسك.</p>
 
