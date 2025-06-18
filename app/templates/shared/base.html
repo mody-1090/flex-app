@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}جُملة – منصة الشراء بالجملة{% endblock %}</title>
+  <!-- أيقونة الموقع -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7YH00K3CR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K7YH00K3CR');
+  </script>
+
+  <!-- Bootstrap RTL -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" />
+  <!-- ملف CSS الخاص -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* شاشة التحميل بخلفية رمضانية */
+    #loading-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #0d237b, #000000);
+      z-index: 9999;
+      overflow: hidden;
+    }
+    #loading-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10000;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      animation: dance 3s infinite;
+    }
+    #loading-text h1 { font-size: 3rem; margin: 0; }
+    #loading-text p { font-size: 1.2rem; margin: .5rem 0 0; }
+    @keyframes dance {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      20% { transform: translate(-50%, -55%) rotate(-5deg); }
+      40% { transform: translate(-50%, -50%) rotate(5deg); }
+      60% { transform: translate(-50%, -55%) rotate(-5deg); }
+      80% { transform: translate(-50%, -50%) rotate(5deg); }
+      100% { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+    .door {
+      position: absolute; top: 0;
+      width: 50%; height: 100%;
+      background: #2e09b4;
+    }
+    #door-left { left: 0; animation: doorLeftAnim 3s forwards; }
+    #door-right{ right:0; animation: doorRightAnim 3s forwards; }
+    @keyframes doorLeftAnim {
+      0% { transform: translateX(-100%); }
+      30%,70% { transform: translateX(0); }
+      100%{ transform: translateX(-100%); }
+    }
+    @keyframes doorRightAnim {
+      0% { transform: translateX(100%); }
+      30%,70% { transform: translateX(0); }
+      100%{ transform: translateX(100%); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- شاشة التحميل -->
+  <div id="loading-screen">
+    <div id="loading-text">
+      <h1>🚀 جُملة</h1>
+      <p>ليست مجرد منصة، بل ثورة في عالم التوريد!</p>
+    </div>
+    <div id="door-left" class="door"></div>
+    <div id="door-right" class="door"></div>
+  </div>
+
+  <!-- نافبار -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('public.index') }}">جُملة</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon">☰</span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('public.index') }}">الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('public.about') }}">عن المنصة</a></li>
+                    
+
+          
+
+        </ul>
+        <div class="d-flex ms-auto">
+
+</div>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- رسائل الفلاش -->
+  <div class="container mt-3">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- محتوى الصفحات -->
+  <div class="container mt-4">
+    {% block content %}{% endblock %}
+  </div>
+
+  <!-- الفوتر -->
+  <footer class="bg-light text-center text-lg-start mt-4">
+    <div class="text-center p-3">
+      © 2025 جميع الحقوق محفوظة لمنصة جُملة |
+      <a href="{{ url_for('public.terms') }}">الشروط والأحكام</a> |
+      <a href="{{ url_for('public.privacy') }}">الخصوصية</a>
+    </div>
+  </footer>
+
+  <!-- ملفات JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script>
+    window.onload = function() {
+      setTimeout(() => {
+        document.getElementById('loading-screen').style.display = 'none';
+      }, 3100);
+    };
+    setTimeout(function() {
+      document.querySelectorAll('.alert').forEach(a => {
+        a.classList.remove('show');
+        a.classList.add('fade');
+        setTimeout(() => a.remove(), 500);
+      });
+    }, 3000);
+  </script>
+</body>
+</html>
