@@ -3,3 +3,5 @@ flask
 Flask-SQLAlchemy
 Flask-WTF
 Flask-Login
+qrcode
+arabic-reshaper
