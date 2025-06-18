@@ -4,28 +4,22 @@
 {% block content %}
 <style>
   @media (max-width: 767px) {
-    #mobile-warning {
-      display: block;
+    .desktop-only {
+      display: none !important;
     }
-    #main-content {
-      display: none;
+    .mobile-msg {
+      display: block !important;
     }
   }
 
   @media (min-width: 768px) {
-    #mobile-warning {
-      display: none;
+    .mobile-msg {
+      display: none !important;
     }
   }
 </style>
 
-<!-- تحذير عند فتح الصفحة من الجوال -->
-<div id="mobile-warning" class="alert alert-danger text-center my-5 mx-3">
-  هذا النظام لا يعمل على الجوال، يُرجى استخدام جهاز لوحي أو كمبيوتر لتجربة النظام بشكل صحيح.
-</div>
-
-<!-- محتوى الصفحة الأساسي -->
-<div id="main-content" class="container text-center py-5">
+<div class="container text-center py-5">
   <h2 class="mb-4">جرّب نظام إدارة المخزون الآن مجانًا!</h2>
   <p class="mb-4">استكشف المميزات المتقدمة التي يقدّمها نظامنا الذكي لإدارة المخزون بنفسك.</p>
 
@@ -36,7 +30,15 @@
         <li><strong>اسم المستخدم:</strong> admin</li>
         <li><strong>كلمة المرور:</strong> admin123</li>
       </ul>
-      <a href="https://anxious-wasp-nicegoout-39a805d2.koyeb.app/web/login" class="btn btn-primary btn-lg mt-3">دخول النظام</a>
+
+      <!-- زر الدخول يظهر فقط على التابلت والكمبيوتر -->
+      <a href="https://anxious-wasp-nicegoout-39a805d2.koyeb.app/web/login"
+         class="btn btn-primary btn-lg mt-3 desktop-only">دخول النظام</a>
+
+      <!-- رسالة تظهر فقط على الجوال -->
+      <p class="mt-3 text-danger fw-bold mobile-msg">
+        يرجى فتح الصفحة من جهاز لوحي أو كمبيوتر لتجربة النظام
+      </p>
     </div>
   </div>
 
